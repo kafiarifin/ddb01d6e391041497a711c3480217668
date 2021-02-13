@@ -94,6 +94,27 @@ services:
         backend:
           ipv4_address: ${NGINX_IP_ADDRESS_BACKEND}
 
+### RabbitMQ #############################################
+    rabbitmq:
+      container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+      build: ./rabbitmq
+      ports:
+        - "${RABBITMQ_NODE_HOST_PORT}:5672"
+        - "${RABBITMQ_MANAGEMENT_HTTPS_HOST_PORT}:15671"
+        - "${RABBITMQ_MANAGEMENT_HTTP_HOST_PORT}:15672"
+      privileged: true
+      environment:
+        - RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq
+        - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS= -rabbit log [{console,[{level,debug}]}]
+      hostname: rabbitmq
+      volumes:
+        - ${DATA_PATH_HOST}/rabbitmq:/var/lib/rabbitmq/mnesia
+      depends_on:
+        - php-fpm
+      networks:
+        backend:
+          ipv4_address: ${RABBITMQ_IP_ADDRESS_BACKEND}
+
 ### PostgreSQL ###########################################
     postgres:
       container_name: ${COMPOSE_PROJECT_NAME}_postgres

@@ -1,0 +1,70 @@
+{
+    "users": [
+        {
+            "name": "odeo",
+            "password": "odeo",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "odeo",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [],
+    "exchanges": [
+        {
+            "name": "mailservice.exchange",
+            "vhost": "/",
+            "type": "fanout",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "queues": [
+        {
+            "name": "mailservice.ruby",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "mailservice.sapphire",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "mailservice.exchanges",
+            "vhost": "/",
+            "destination": "mailservice.ruby",
+            "destination_type": "queue",
+            "routing_key": "mailservice.ruby.#",
+            "arguments": {}
+        },
+        {
+            "source": "mailservice.exchanges",
+            "vhost": "/",
+            "destination": "mailservice.sapphire",
+            "destination_type": "queue",
+            "routing_key": "mailservice.sapphire.#",
+            "arguments": {}
+        }
+    ]
+}
