@@ -11,7 +11,7 @@ namespace Config;
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License V3.0
  * @link     http://www.hashbangcode.com/
  */
-class Connection
+class DatabaseConnection
 {
 
     /**
