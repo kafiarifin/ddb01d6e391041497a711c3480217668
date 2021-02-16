@@ -19,8 +19,8 @@
     "homepage": "http://github.com/kafiarifin/ddb01d6e391041497a711c3480217668",
     "autoload": {
         "psr-4": {
-            "Config\\": "config/*",
-            "Api\\": "api/*"
+            "Config\\": "config/",
+            "Api\\": "api/"
         }
     },
     "require": {
